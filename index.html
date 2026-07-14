@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Web Kemilearn</title>
+    <style>
+        /* Mengatur kanvas utama dan menghilangkan sisa margin/shading */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #d9f0fe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Mencegah munculnya scrollbar */
+        }
+
+        /* Container Slide: Mempertahankan 16:9 dan auto-stretch */
+        .slide-container {
+            position: relative;
+            background-image: url('panduanweb.png');
+            background-size: 100% 100%; /* Stretch gambar agar pas grid, tidak pecah asal resolusi asli 1080p */
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Mengaktifkan sistem koordinat 16x9 */
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            
+            /* Logic Aspect Ratio agar selalu 16:9 dan tidak melebihi layar browser */
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        /* Penyesuaian responsif ekstra jika rasio layar pengguna bukan 16:9 */
+        @media (min-aspect-ratio: 16/9) {
+            .slide-container { width: auto; height: 100vh; }
+        }
+        @media (max-aspect-ratio: 16/9) {
+            .slide-container { width: 100vw; height: auto; }
+        }
+
+        /* Area Klik Navigasi Kiri (a1 - a9) */
+        .nav-left {
+            grid-column: 1 / 2;
+            grid-row: 1 / 10;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Area Klik Tombol Beranda (g7 - j8) */
+        /* G = kolom ke-7, J = kolom ke-10. Baris ke-7 sampai 8 */
+        .btn-beranda {
+            grid-column: 7 / 11; 
+            grid-row: 7 / 9;
+            cursor: pointer;
+            z-index: 10;
+            /* Hilangkan outline biru saat di-klik/fokus */
+            outline: none; 
+            text-decoration: none;
+        }
+
+        /* Area Klik Navigasi Kanan (p1 - p9) */
+        /* P = kolom ke-16 */
+        .nav-right {
+            grid-column: 16 / 17;
+            grid-row: 1 / 10;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        <div class="nav-left" id="btn-prev" onclick="prevSlide()" aria-label="Slide Sebelumnya"></div>
+        
+        <a href="https://sites.google.com/view/kemilearn/beranda" target="_top" class="btn-beranda" id="btn-beranda" aria-label="Ke Beranda"></a>
+        
+        <div class="nav-right" id="btn-next" onclick="nextSlide()" aria-label="Slide Selanjutnya"></div>
+    </div>
+
+    <script>
+        // Logika untuk pengembangan slide selanjutnya
+        function prevSlide() {
+            console.log("Fungsi: Pindah ke slide sebelumnya");
+            // Sisipkan kode ganti gambar/halaman slide di sini nantinya
+        }
+
+        function nextSlide() {
+            console.log("Fungsi: Pindah ke slide selanjutnya");
+            // Sisipkan kode ganti gambar/halaman slide di sini nantinya
+        }
+
+        // Fitur Crossplatform: Kontrol Keyboard
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key === 'Enter') {
+                // Simulasi klik pada tombol beranda
+                document.getElementById('btn-beranda').click();
+            } 
+            else if (key === 'ArrowLeft' || key === 'PageUp') {
+                // Tombol Kiri atau Page Up
+                prevSlide();
+            } 
+            else if (key === 'ArrowRight' || key === 'PageDown') {
+                // Tombol Kanan atau Page Down
+                nextSlide();
+            }
+        });
+    </script>
+</body>
+</html>
